@@ -44,26 +44,19 @@ export function limesToCut(wedgesNeeded, limes) {
 
   let limesCounter = 0;
   
-  while (wedgesNeeded > 0){
-    let element = limes.shift();
-
-    switch(element){
-      case 'small': {
+  while (wedgesNeeded > 0 && limesCounter < limes.length){
+    switch(limes[limesCounter]){
+      case 'small':
         wedgesNeeded -= 6;
-        limesCounter++;
         break;
-      }
-      case 'medium': {
+      case 'medium':
         wedgesNeeded -= 8;
-        limesCounter++;
         break;
-      }
-      case 'large': {
+      case 'large':
         wedgesNeeded -= 10;
-        limesCounter++;
         break;
-      } 
     }
+    limesCounter++;
   }
 
   return limesCounter;
@@ -77,5 +70,10 @@ export function limesToCut(wedgesNeeded, limes) {
  * @returns {string[]} remaining orders after the time is up
  */
 export function remainingOrders(timeLeft, orders) {
-  throw new Error('Please implement the remainingOrders function');
+
+  while(timeLeft > 0){
+    timeLeft -= timeToMixJuice(orders.shift());
+  }
+
+  return orders;
 }
